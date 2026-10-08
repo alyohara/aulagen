@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.aula-prose {
+    @apply text-base leading-relaxed text-slate-700;
+}
+
+.aula-prose h1,
+.aula-prose h2,
+.aula-prose h3,
+.aula-prose h4 {
+    @apply mb-3 mt-6 font-semibold text-slate-900;
+}
+
+.aula-prose h1 { @apply text-2xl; }
+.aula-prose h2 { @apply text-xl; }
+.aula-prose h3 { @apply text-lg; }
+.aula-prose h4 { @apply text-base; }
+
+.aula-prose p {
+    @apply mb-4;
+}
+
+.aula-prose ul {
+    @apply mb-4 list-disc space-y-1 pl-6;
+}
+
+.aula-prose ol {
+    @apply mb-4 list-decimal space-y-1 pl-6;
+}
+
+.aula-prose a {
+    @apply text-indigo-600 underline;
+}
+
+.aula-prose strong {
+    @apply font-semibold text-slate-900;
+}
+
+.aula-prose code {
+    @apply rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[0.9em] text-rose-700;
+}
+
+.aula-prose pre {
+    @apply mb-4 overflow-x-auto rounded-lg bg-slate-900 p-4 text-sm leading-relaxed text-slate-100;
+}
+
+.aula-prose pre code {
+    @apply bg-transparent p-0 text-slate-100;
+}
+
+.aula-prose blockquote {
+    @apply mb-4 border-l-4 border-indigo-300 bg-indigo-50 px-4 py-3 text-sm text-indigo-900;
+}
+
+.aula-prose blockquote p {
+    @apply mb-0;
+}
+
+.aula-prose table {
+    @apply mb-4 w-full border-collapse text-sm;
+}
+
+.aula-prose th,
+.aula-prose td {
+    @apply border border-slate-300 px-3 py-2 text-left;
+}
+
+.aula-prose th {
+    @apply bg-slate-100 font-semibold;
+}

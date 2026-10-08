@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AulaGen turns educator-owned teaching materials into reviewable, AI-assisted virtual classrooms.">
+  <title>AulaGen | AI-assisted classrooms, led by educators</title>
+  <style>
+    :root { color-scheme: dark; --bg:#08101f; --panel:#101b31; --line:#263653; --text:#eef4ff; --muted:#a9bad7; --blue:#65a8ff; --mint:#76e4c1; }
+    * { box-sizing:border-box; }
+    body { margin:0; font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--text); background:radial-gradient(circle at 14% -10%,#1c417a 0,transparent 31rem),var(--bg); }
+    a { color:inherit; text-decoration:none; }
+    .wrap { max-width:1120px; margin:auto; padding:0 24px; }
+    header { display:flex; align-items:center; justify-content:space-between; min-height:76px; }
+    .brand { display:flex; gap:10px; align-items:center; font-weight:750; font-size:1.25rem; }
+    .mark { display:grid; place-items:center; width:34px; height:34px; border-radius:9px; background:linear-gradient(135deg,var(--blue),#6e70f8); font-weight:900; }
+    nav { display:flex; gap:20px; color:var(--muted); font-size:.92rem; }
+    .hero { padding:88px 0 72px; max-width:760px; }
+    .eyebrow { display:inline-block; padding:5px 11px; border:1px solid #3c65a1; border-radius:999px; color:#b9d5ff; font-size:.82rem; }
+    h1 { margin:18px 0; font-size:clamp(2.7rem,7vw,5.6rem); line-height:1.02; letter-spacing:-.065em; }
+    h1 span { color:var(--blue); }
+    .lede { max-width:650px; font-size:1.2rem; color:var(--muted); }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
+    .button { display:inline-block; padding:11px 17px; border-radius:8px; font-weight:700; background:var(--blue); color:#061326; }
+    .button.secondary { background:transparent; border:1px solid var(--line); color:var(--text); }
+    section { padding:70px 0; border-top:1px solid var(--line); }
+    h2 { margin:0 0 12px; font-size:clamp(1.85rem,4vw,3rem); letter-spacing:-.04em; }
+    .section-lede { max-width:680px; margin:0 0 34px; color:var(--muted); }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .card { padding:24px; border:1px solid var(--line); border-radius:12px; background:linear-gradient(145deg,rgba(23,40,71,.95),rgba(13,24,45,.9)); }
+    .card b { display:block; margin-bottom:7px; font-size:1.05rem; }
+    .card p { margin:0; color:var(--muted); font-size:.94rem; }
+    .number { color:var(--mint); font-size:.8rem; font-weight:800; letter-spacing:.08em; }
+    .flow { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+    .flow div { padding:19px; border-top:2px solid var(--blue); background:rgba(16,27,49,.72); }
+    .flow strong { display:block; margin:7px 0; }
+    .flow span { color:var(--muted); font-size:.9rem; }
+    .stack { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .stack ul { margin:14px 0 0; padding-left:18px; color:var(--muted); }
+    .stack li { margin:5px 0; }
+    .cta { text-align:center; border:1px solid #3b5d95; border-radius:16px; background:linear-gradient(135deg,#132b51,#111b36); }
+    footer { padding:34px 0; color:var(--muted); font-size:.9rem; }
+    @media (max-width:760px) { nav { display:none; } .hero { padding:58px 0; } .grid,.flow,.stack { grid-template-columns:1fr; } section { padding:52px 0; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./" aria-label="AulaGen home"><span class="mark">A</span>AulaGen</a>
+      <nav><a href="#workflow">Workflow</a><a href="#experience">Experience</a><a href="#technology">Technology</a><a href="https://github.com/alyohara/aulagen">GitHub</a></nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <span class="eyebrow">Open-source AI-assisted learning platform</span>
+        <h1>Your teaching materials, shaped into a <span>virtual classroom.</span></h1>
+        <p class="lede">AulaGen helps educators turn their own course files into structured lessons, activities, and a student-facing classroom—while keeping every publication decision in the teacher's hands.</p>
+        <div class="actions">
+          <a class="button" href="https://github.com/alyohara/aulagen">Explore the repository</a>
+          <a class="button secondary" href="#workflow">See how it works</a>
+        </div>
+      </section>
+
+      <section id="workflow">
+        <h2>AI organizes. Educators decide.</h2>
+        <p class="section-lede">The platform is designed around human review, not automatic publishing. AI accelerates course preparation while teachers remain responsible for the final learning experience.</p>
+        <div class="flow">
+          <div><span class="number">01</span><strong>Bring your material</strong><span>Upload documents and add links or video references to a course.</span></div>
+          <div><span class="number">02</span><strong>Index the knowledge</strong><span>Text is extracted, chunked, embedded, and made searchable.</span></div>
+          <div><span class="number">03</span><strong>Build the classroom</strong><span>AI proposes modules, lessons, activities, and a glossary from those sources.</span></div>
+          <div><span class="number">04</span><strong>Review and publish</strong><span>Edit, approve, reject, and publish exactly what students should see.</span></div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <h2>One platform, two focused experiences.</h2>
+        <p class="section-lede">AulaGen supports the people who create a course and the people who learn from it.</p>
+        <div class="grid">
+          <article class="card"><b>For educators</b><p>Create courses, upload and assign material, organize modules and lessons, generate learning content, and control publication.</p></article>
+          <article class="card"><b>For students</b><p>Follow a clear lesson path, record learning progress, complete self-check activities, browse sources, and search course content.</p></article>
+          <article class="card"><b>For administrators</b><p>Manage users, roles, AI settings, provider connectivity, and generation activity from a dedicated administration area.</p></article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Answers grounded in the course material.</h2>
+        <p class="section-lede">The student assistant uses retrieval-augmented generation (RAG): it retrieves relevant pieces of the course's indexed content, supplies them as context, and returns source references. Teachers can disable the assistant or control whether external knowledge is allowed.</p>
+        <div class="stack">
+          <article class="card"><b>Teacher-owned context</b><ul><li>Content chunks created from uploaded resources</li><li>Semantic vector search with lexical fallback</li><li>Source labels carried into generated responses</li></ul></article>
+          <article class="card"><b>Provider flexibility</b><ul><li>Local Ollama models for self-hosted workflows</li><li>Google Gemini and OpenAI support</li><li>OpenAI-compatible custom endpoints and local fallback</li></ul></article>
+        </div>
+      </section>
+
+      <section id="technology">
+        <h2>Built for a practical, self-hosted stack.</h2>
+        <p class="section-lede">The web application combines Laravel 12 and Inertia React with a Docker Compose development environment.</p>
+        <div class="grid">
+          <article class="card"><b>Application</b><p>PHP, Laravel, Inertia.js, React, TypeScript, Vite, and Tailwind CSS.</p></article>
+          <article class="card"><b>Data and jobs</b><p>PostgreSQL with pgvector, Redis, queued processing, and Laravel Horizon.</p></article>
+          <article class="card"><b>Local development</b><p>Docker Compose for the complete stack, with SQLite available for a lightweight local setup.</p></article>
+        </div>
+      </section>
+
+      <section class="cta">
+        <h2>Build better classrooms from the material you already have.</h2>
+        <p class="section-lede" style="margin:12px auto 25px">Read the setup instructions, run the stack locally, and adapt AulaGen to your educational context.</p>
+        <a class="button" href="https://github.com/alyohara/aulagen">View AulaGen on GitHub</a>
+      </section>
+    </main>
+
+    <footer>© 2026 AulaGen · Released under the MIT License · The GitHub Pages site presents the project; the Laravel application requires its own runtime environment.</footer>
+  </div>
+</body>
+</html>

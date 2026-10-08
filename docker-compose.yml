@@ -1,0 +1,121 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aulagen_app
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8000
+      APP_KEY: ${APP_KEY}
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: ${DB_DATABASE:-aulagen}
+      DB_USERNAME: ${DB_USERNAME:-aulagen}
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      REDIS_HOST: redis
+      CACHE_STORE: redis
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: redis
+      AI_PROVIDER: ${AI_PROVIDER:-ollama}
+      OLLAMA_HOST: http://ollama:11434
+      RUN_MIGRATIONS: "true"
+    volumes:
+      - .:/var/www/html
+      - app_vendor:/var/www/html/vendor
+      - app_node_modules:/var/www/html/node_modules
+      - app_storage:/var/www/html/storage
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aulagen_queue
+    command: php artisan horizon
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_KEY: ${APP_KEY}
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: ${DB_DATABASE:-aulagen}
+      DB_USERNAME: ${DB_USERNAME:-aulagen}
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      REDIS_HOST: redis
+      CACHE_STORE: redis
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: redis
+      AI_PROVIDER: ${AI_PROVIDER:-ollama}
+      OLLAMA_HOST: http://ollama:11434
+    volumes:
+      - .:/var/www/html
+      - app_vendor:/var/www/html/vendor
+      - app_node_modules:/var/www/html/node_modules
+      - app_storage:/var/www/html/storage
+    depends_on:
+      app:
+        condition: service_started
+      redis:
+        condition: service_started
+    restart: unless-stopped
+
+  db:
+    image: pgvector/pgvector:pg17
+    container_name: aulagen_db
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-aulagen}
+      POSTGRES_USER: ${DB_USERNAME:-aulagen}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-aulagen} -d ${DB_DATABASE:-aulagen}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    container_name: aulagen_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  # IA local (opcional). Activar con: docker compose --profile ollama up -d
+  ollama:
+    image: ollama/ollama:latest
+    container_name: aulagen_ollama
+    profiles: ["ollama"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  app_vendor:
+  app_node_modules:
+  app_storage:
+  db_data:
+  redis_data:
+  ollama_models:
