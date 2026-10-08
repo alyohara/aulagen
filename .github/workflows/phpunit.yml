@@ -31,6 +31,9 @@ jobs:
       - name: Install PHP dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
 
+      - name: Create environment file
+        run: cp .env.example .env
+
       - name: Install JavaScript dependencies
         run: npm ci
 
