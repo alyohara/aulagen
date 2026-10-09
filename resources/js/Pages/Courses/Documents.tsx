@@ -6,6 +6,7 @@ import { Input, Label, Select, Textarea } from '@/Components/ui/form';
 import { CourseSummary, DocumentRow } from '@/types/models';
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import { FormEvent, useState } from 'react';
+import { confirmLocalized } from '@/lib/i18n';
 
 interface Props {
     course: CourseSummary;
@@ -192,7 +193,7 @@ export default function Documents({ course, documents, modules }: Props) {
                                     size="sm"
                                     variant="ghost"
                                     onClick={() => {
-                                        if (confirm(`¿Eliminar "${doc.name}"?`)) {
+                                        if (confirmLocalized(`¿Eliminar "${doc.name}"?`)) {
                                             router.delete(route('courses.documents.destroy', [course.id, doc.id]), { preserveScroll: true });
                                         }
                                     }}

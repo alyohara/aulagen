@@ -7,6 +7,7 @@ import { Modal } from '@/Components/ui/modal';
 import { ActivityRow, CourseSummary, QuestionRow } from '@/types/models';
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import { FormEvent, useState } from 'react';
+import { confirmLocalized } from '@/lib/i18n';
 
 interface Props {
     course: CourseSummary;
@@ -155,7 +156,7 @@ export default function Activities({ course, activities, modules }: Props) {
                                             size="sm"
                                             variant="ghost"
                                             onClick={() => {
-                                                if (confirm(`¿Eliminar "${activity.title}"?`)) {
+                                                if (confirmLocalized(`¿Eliminar "${activity.title}"?`)) {
                                                     router.delete(route('courses.activities.destroy', [course.id, activity.id]), { preserveScroll: true });
                                                 }
                                             }}

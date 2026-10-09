@@ -152,6 +152,28 @@ class AulaTest extends TestCase
             ->assertNotFound();
     }
 
+    public function test_draft_activity_answers_cannot_be_checked_by_guests(): void
+    {
+        $course = $this->makeCourse();
+        $activity = Activity::factory()->draft()->create(['course_id' => $course->id]);
+        $question = Question::factory()->create([
+            'activity_id' => $activity->id,
+            'course_id' => $course->id,
+            'correct_answer' => 'Hidden answer',
+        ]);
+
+        $this->postJson(route('aula.check', [$course, $activity]), [
+            'answers' => [(string) $question->id => 'Hidden answer'],
+        ])->assertNotFound();
+
+        $this->actingAs($course->owner)
+            ->postJson(route('aula.check', [$course, $activity]).'?preview=1', [
+                'answers' => [(string) $question->id => 'Hidden answer'],
+            ])
+            ->assertOk()
+            ->assertJsonPath("results.{$question->id}.correct_answer", 'Hidden answer');
+    }
+
     public function test_supporting_pages_render(): void
     {
         $course = $this->makeCourse();

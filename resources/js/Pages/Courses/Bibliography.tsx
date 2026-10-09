@@ -7,6 +7,7 @@ import { Modal } from '@/Components/ui/modal';
 import { BibliographyRow, CourseSummary } from '@/types/models';
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import { FormEvent, useState } from 'react';
+import { confirmLocalized } from '@/lib/i18n';
 
 interface Props {
     course: CourseSummary;
@@ -88,7 +89,7 @@ export default function Bibliography({ course, entries }: Props) {
                         size="sm"
                         variant="ghost"
                         onClick={() => {
-                            if (confirm('¿Eliminar esta referencia?')) {
+                            if (confirmLocalized('¿Eliminar esta referencia?')) {
                                 router.delete(route('courses.bibliography.destroy', [course.id, entry.id]), { preserveScroll: true });
                             }
                         }}

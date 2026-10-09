@@ -12,6 +12,7 @@ use App\Http\Controllers\Teacher\CourseController;
 use App\Http\Controllers\Teacher\DashboardController;
 use App\Http\Controllers\Teacher\DocumentController;
 use App\Http\Controllers\Teacher\StructureController;
+use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -31,6 +32,8 @@ Route::get('/', function () {
         ] : null,
     ]);
 });
+
+Route::put('/locale', [LocaleController::class, 'update'])->name('locale.update');
 
 /*
 |--------------------------------------------------------------------------

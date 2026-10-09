@@ -7,6 +7,7 @@ import { Modal } from '@/Components/ui/modal';
 import { CourseSummary, ModuleNode } from '@/types/models';
 import { Head, Link, router } from '@inertiajs/react';
 import { useState } from 'react';
+import { confirmLocalized } from '@/lib/i18n';
 
 interface ProposalModule {
     title: string;
@@ -154,7 +155,7 @@ export default function Content({ course, modules, proposal, provider }: Props) 
                                         size="sm"
                                         variant="danger"
                                         onClick={() => {
-                                            if (confirm(`¿Eliminar el módulo "${module.title}" con sus lecciones?`)) {
+                                            if (confirmLocalized(`¿Eliminar el módulo "${module.title}" con sus lecciones?`)) {
                                                 router.delete(route('courses.modules.destroy', [course.id, module.id]), { preserveScroll: true });
                                             }
                                         }}
@@ -203,7 +204,7 @@ export default function Content({ course, modules, proposal, provider }: Props) 
                                             size="sm"
                                             variant="ghost"
                                             onClick={() => {
-                                                if (confirm(`¿Eliminar la lección "${lesson.title}"?`)) {
+                                                if (confirmLocalized(`¿Eliminar la lección "${lesson.title}"?`)) {
                                                     router.delete(route('courses.lessons.destroy', [course.id, lesson.id]), { preserveScroll: true });
                                                 }
                                             }}

@@ -1,18 +1,24 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import LanguageSwitcher from '@/Components/LanguageSwitcher';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Alert } from '@/Components/ui/badge';
 import { Link, usePage } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode, useState } from 'react';
+import { LocalizedContent } from '@/lib/i18n';
 
 export default function Authenticated({ header, children }: PropsWithChildren<{ header?: ReactNode }>) {
     const { user } = usePage().props.auth;
     const flash = usePage().props.flash ?? {};
+    const locale = usePage().props.locale ?? 'en';
+    const t = locale === 'es'
+        ? { courses: 'Mis materias', profile: 'Mi perfil', signOut: 'Cerrar sesión' }
+        : { courses: 'My courses', profile: 'My profile', signOut: 'Sign out' };
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen bg-slate-100">
+        <LocalizedContent><div className="min-h-screen bg-slate-100">
             <nav className="border-b border-slate-200 bg-white">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
@@ -26,7 +32,7 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Mis materias
+                                    {t.courses}
                                 </NavLink>
                                 {user?.can?.admin_panel && (
                                     <NavLink href={route('admin.dashboard')} active={route().current('admin.*')}>
@@ -36,7 +42,8 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
                             </div>
                         </div>
 
-                        <div className="hidden sm:ms-6 sm:flex sm:items-center">
+                        <div className="hidden gap-2 sm:ms-6 sm:flex sm:items-center">
+                            <LanguageSwitcher />
                             <div className="relative ms-3">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -58,9 +65,9 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>Mi perfil</Dropdown.Link>
+                                        <Dropdown.Link href={route('profile.edit')}>{t.profile}</Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Cerrar sesión
+                                            {t.signOut}
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -83,8 +90,9 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="space-y-1 pb-3 pt-2">
+                        <div className="px-4 py-2"><LanguageSwitcher /></div>
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Mis materias
+                            {t.courses}
                         </ResponsiveNavLink>
                         {user?.can?.admin_panel && (
                             <ResponsiveNavLink href={route('admin.dashboard')} active={route().current('admin.*')}>
@@ -100,9 +108,9 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Mi perfil</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('profile.edit')}>{t.profile}</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                Cerrar sesión
+                                {t.signOut}
                             </ResponsiveNavLink>
                         </div>
                     </div>
@@ -124,6 +132,6 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
             )}
 
             <main>{children}</main>
-        </div>
+        </div></LocalizedContent>
     );
 }

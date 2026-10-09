@@ -149,6 +149,7 @@ class AulaController extends Controller
         [$isPreview] = $this->guard($request, $course);
 
         $activity = $course->activities()->with('questions')->findOrFail($activityId);
+        abort_if(! $isPreview && $activity->status === 'draft', 404);
 
         $data = $request->validate([
             'answers' => ['required', 'array'],

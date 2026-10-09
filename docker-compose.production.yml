@@ -1,0 +1,115 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_URL: ${APP_URL:?Set APP_URL in .env.production}
+      APP_KEY: ${APP_KEY:?Set APP_KEY in .env.production}
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: ${DB_DATABASE:?Set DB_DATABASE in .env.production}
+      DB_USERNAME: ${DB_USERNAME:?Set DB_USERNAME in .env.production}
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env.production}
+      REDIS_HOST: redis
+      CACHE_STORE: redis
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: redis
+      AI_PROVIDER: ${AI_PROVIDER:-local}
+      RUN_MIGRATIONS: "false"
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail --silent http://127.0.0.1:8000/up > /dev/null"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: php artisan horizon
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: ${APP_KEY:?Set APP_KEY in .env.production}
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: ${DB_DATABASE:?Set DB_DATABASE in .env.production}
+      DB_USERNAME: ${DB_USERNAME:?Set DB_USERNAME in .env.production}
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env.production}
+      REDIS_HOST: redis
+      CACHE_STORE: redis
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: redis
+      AI_PROVIDER: ${AI_PROVIDER:-local}
+      RUN_MIGRATIONS: "false"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: php artisan migrate --force --no-interaction
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: ${APP_KEY:?Set APP_KEY in .env.production}
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: ${DB_DATABASE:?Set DB_DATABASE in .env.production}
+      DB_USERNAME: ${DB_USERNAME:?Set DB_USERNAME in .env.production}
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env.production}
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles: ["maintenance"]
+
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:?Set DB_DATABASE in .env.production}
+      POSTGRES_USER: ${DB_USERNAME:?Set DB_USERNAME in .env.production}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env.production}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:?Set DB_USERNAME in .env.production} -d ${DB_DATABASE:?Set DB_DATABASE in .env.production}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  db_data:
+  redis_data:

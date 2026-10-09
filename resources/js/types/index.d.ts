@@ -20,6 +20,7 @@ export interface FlashData {
 }
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
+    locale: 'en' | 'es';
     auth: {
         user: User;
     };
