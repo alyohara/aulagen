@@ -1,35 +1,5 @@
 <!doctype html>
-<html lang="es">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Administración de usuarios y proveedores de inteligencia artificial en AulaGen."><title>Administración e IA | AulaGen Docs</title><link rel="stylesheet" href="assets/wiki.css"></head>
-<body>
-  <header class="site-header"><div class="header-inner"><a class="brand" href="./"><span class="brand-mark">A</span>AulaGen Docs</a><nav class="top-nav" aria-label="Navegación principal"><a href="instalacion.html">Instalación</a><a href="docentes.html">Docentes</a><a href="arquitectura.html">Arquitectura</a><a class="github-link" href="https://github.com/alyohara/aulagen">GitHub</a></nav></div></header>
-  <main class="layout">
-    <aside class="sidebar" aria-label="Secciones de la documentación"><div class="sidebar-group"><p class="sidebar-title">Empezar</p><a href="./">Bienvenida</a><a href="instalacion.html">Instalación</a></div><div class="sidebar-group"><p class="sidebar-title">Uso</p><a href="docentes.html">Guía docente</a><a href="administracion.html" aria-current="page">Administración e IA</a></div><div class="sidebar-group"><p class="sidebar-title">Referencia</p><a href="operacion.html">Operación</a><a href="arquitectura.html">Arquitectura</a></div></aside>
-    <article class="content">
-      <p class="eyebrow">Administración</p><h1>Usuarios, IA y privacidad</h1><p class="lead">Las personas con rol administrador controlan las cuentas, la configuración global de IA y el historial de generaciones.</p>
-      <h2>Gestión de usuarios</h2>
-      <p>Desde el área de administración podés revisar usuarios y actualizar su rol o estado de actividad. Asigná el acceso mínimo necesario: los docentes administran sus materias y los estudiantes consumen aulas publicadas.</p>
-      <h2>Proveedores de IA</h2>
-      <p>La aplicación usa la variable <code>AI_PROVIDER</code> y su configuración de entorno para elegir el proveedor activo. Desde la administración se puede revisar y probar la configuración que utiliza la aplicación.</p>
-      <table><thead><tr><th>Valor</th><th>Uso</th></tr></thead><tbody><tr><td><code>auto</code></td><td>Intenta el proveedor primario y usa el fallback configurado si falla.</td></tr><tr><td><code>ollama</code></td><td>Servicio Ollama local o autoalojado.</td></tr><tr><td><code>gemini</code></td><td>API de Google Gemini.</td></tr><tr><td><code>openai</code></td><td>API de OpenAI.</td></tr><tr><td><code>custom</code></td><td>Endpoint compatible con OpenAI.</td></tr><tr><td><code>local</code></td><td>Fallback heurístico integrado, sin modelo remoto.</td></tr></tbody></table>
-      <h3>Ejemplo con Ollama</h3>
-      <pre><code>AI_PROVIDER=ollama
-OLLAMA_HOST=http://127.0.0.1:11434
-OLLAMA_MODEL=llama3.2
-OLLAMA_EMBED_MODEL=nomic-embed-text
-AI_EMBEDDING_DIM=768
-AI_RAG_TOP_K=6
-AI_RATE_LIMIT=10
-AI_MAX_UPLOAD_MB=40</code></pre>
-      <p>Para Gemini u OpenAI, definí la clave correspondiente como secreto de despliegue. Nunca incluyas archivos <code>.env</code> ni claves reales en el repositorio.</p>
-      <h2>Configuración por materia</h2>
-      <p>Cada materia conserva opciones propias para el asistente, búsqueda, progreso, fuentes visibles, descargas, generación automática de recursos y conocimiento externo. Ajustalas al propósito de la materia y a las normas institucionales, no solo a las capacidades del proveedor.</p>
-      <h2>Privacidad y uso responsable</h2>
-      <ul><li>Verificá la política del proveedor antes de enviar materiales de docentes o estudiantes.</li><li>No cargues datos sensibles si no existe una base institucional para compartirlos.</li><li>Revisá resultados antes de publicarlos; una salida de IA no reemplaza el criterio docente.</li><li>Usá un proveedor autoalojado cuando la política de datos requiera que el procesamiento permanezca bajo tu control.</li></ul>
-      <h2>Registro de generaciones</h2>
-      <p>El área administrativa incluye un historial de generaciones para facilitar la supervisión. Usalo junto con las pruebas de conexión al proveedor al investigar fallos, límites de tasa o resultados inesperados.</p>
-    </article>
-  </main>
-  <footer class="page-footer"><div class="footer-inner">AulaGen · <a href="https://github.com/alyohara/aulagen">Repositorio en GitHub</a> · Licencia MIT</div></footer>
-</body>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="AulaGen administration and AI guide."><title>Administration & AI | AulaGen</title><link rel="stylesheet" href="assets/wiki.css"><script src="assets/site.js" defer></script></head>
+<body data-page="administration"></body>
 </html>

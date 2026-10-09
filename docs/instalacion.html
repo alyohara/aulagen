@@ -1,47 +1,5 @@
 <!doctype html>
-<html lang="es">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Instalación de AulaGen con Docker o en un entorno local."><title>Instalación | AulaGen Docs</title><link rel="stylesheet" href="assets/wiki.css"></head>
-<body>
-  <header class="site-header"><div class="header-inner"><a class="brand" href="./"><span class="brand-mark">A</span>AulaGen Docs</a><nav class="top-nav" aria-label="Navegación principal"><a href="instalacion.html" aria-current="page">Instalación</a><a href="docentes.html">Docentes</a><a href="arquitectura.html">Arquitectura</a><a class="github-link" href="https://github.com/alyohara/aulagen">GitHub</a></nav></div></header>
-  <main class="layout">
-    <aside class="sidebar" aria-label="Secciones de la documentación"><div class="sidebar-group"><p class="sidebar-title">Empezar</p><a href="./">Bienvenida</a><a href="instalacion.html" aria-current="page">Instalación</a></div><div class="sidebar-group"><p class="sidebar-title">Uso</p><a href="docentes.html">Guía docente</a><a href="administracion.html">Administración e IA</a></div><div class="sidebar-group"><p class="sidebar-title">Referencia</p><a href="operacion.html">Operación</a><a href="arquitectura.html">Arquitectura</a></div></aside>
-    <article class="content">
-      <p class="eyebrow">Inicio rápido</p><h1>Instalación</h1><p class="lead">Docker Compose es la opción recomendada: levanta la aplicación, las colas, PostgreSQL con pgvector y Redis.</p>
-      <h2>Requisitos</h2>
-      <table><thead><tr><th>Opción</th><th>Necesitás</th></tr></thead><tbody><tr><td>Docker (recomendada)</td><td>Docker Desktop 20.10+, Docker Compose v2, Git y los puertos <code>8000</code>, <code>5432</code> y <code>6379</code> libres.</td></tr><tr><td>Desarrollo local</td><td>PHP 8.2+, Composer, Node.js 22+, npm y SQLite. Para una configuración similar a producción se requieren PostgreSQL y Redis.</td></tr></tbody></table>
-      <h2>Con Docker Compose</h2>
-      <ol class="steps"><li class="step">Cloná el repositorio y prepará el archivo de entorno.</li></ol>
-      <pre><code>git clone https://github.com/alyohara/aulagen.git
-cd aulagen
-cp .env.example .env</code></pre>
-      <ol class="steps" start="2"><li class="step">Construí e iniciá los servicios.</li></ol>
-      <pre><code>docker compose up -d --build</code></pre>
-      <p>Abrí <a href="http://localhost:8000">http://localhost:8000</a>. El contenedor ejecuta las migraciones cuando <code>RUN_MIGRATIONS=true</code>. Si hace falta crear la clave de aplicación, ejecutá:</p>
-      <pre><code>docker compose exec app php artisan key:generate</code></pre>
-      <h3>IA local con Ollama</h3>
-      <p>Ollama es opcional. Para iniciar su servicio y descargar los modelos configurados:</p>
-      <pre><code>docker compose --profile ollama up -d
-docker compose exec ollama ollama pull llama3.2
-docker compose exec ollama ollama pull nomic-embed-text</code></pre>
-      <h2>Desarrollo local en Windows</h2>
-      <pre><code>git clone https://github.com/alyohara/aulagen.git
-Set-Location aulagen
-composer install
-npm install
-Copy-Item .env.example .env
-php artisan key:generate
-New-Item -ItemType File -Force database\database.sqlite
-php artisan migrate --seed
-npm run build
-php artisan serve --host=127.0.0.1 --port=8000</code></pre>
-      <p>Al procesar materiales, iniciá las colas en otra terminal:</p><pre><code>php artisan horizon</code></pre>
-      <p>También podés usar <code>composer run dev</code> para iniciar el servidor, el worker, los logs y Vite juntos.</p>
-      <h2>Cuentas de demostración</h2>
-      <p>Luego de ejecutar los seeders, todas usan la contraseña <code>password</code>. Son exclusivas para desarrollo local.</p>
-      <table><thead><tr><th>Rol</th><th>Correo</th></tr></thead><tbody><tr><td>Administrador</td><td><code>admin@aulagen.test</code></td></tr><tr><td>Docente</td><td><code>docente@aulagen.test</code></td></tr><tr><td>Estudiante</td><td><code>alumno@aulagen.test</code></td></tr></tbody></table>
-      <div class="notice"><strong>Siguiente paso:</strong> configurá el proveedor que usará la aplicación en <a href="administracion.html">Administración e IA</a> y seguí el recorrido de la <a href="docentes.html">guía docente</a>.</div>
-    </article>
-  </main>
-  <footer class="page-footer"><div class="footer-inner">AulaGen · <a href="https://github.com/alyohara/aulagen">Repositorio en GitHub</a> · Licencia MIT</div></footer>
-</body>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Install AulaGen."><title>Installation | AulaGen</title><link rel="stylesheet" href="assets/wiki.css"><script src="assets/site.js" defer></script></head>
+<body data-page="installation"></body>
 </html>

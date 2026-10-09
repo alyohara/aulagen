@@ -1,24 +1,5 @@
 <!doctype html>
-<html lang="es">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Arquitectura y flujo de datos de AulaGen."><title>Arquitectura | AulaGen Docs</title><link rel="stylesheet" href="assets/wiki.css"></head>
-<body>
-  <header class="site-header"><div class="header-inner"><a class="brand" href="./"><span class="brand-mark">A</span>AulaGen Docs</a><nav class="top-nav" aria-label="Navegación principal"><a href="instalacion.html">Instalación</a><a href="docentes.html">Docentes</a><a href="arquitectura.html" aria-current="page">Arquitectura</a><a class="github-link" href="https://github.com/alyohara/aulagen">GitHub</a></nav></div></header>
-  <main class="layout">
-    <aside class="sidebar" aria-label="Secciones de la documentación"><div class="sidebar-group"><p class="sidebar-title">Empezar</p><a href="./">Bienvenida</a><a href="instalacion.html">Instalación</a></div><div class="sidebar-group"><p class="sidebar-title">Uso</p><a href="docentes.html">Guía docente</a><a href="administracion.html">Administración e IA</a></div><div class="sidebar-group"><p class="sidebar-title">Referencia</p><a href="operacion.html">Operación</a><a href="arquitectura.html" aria-current="page">Arquitectura</a></div></aside>
-    <article class="content">
-      <p class="eyebrow">Referencia técnica</p><h1>Arquitectura</h1><p class="lead">AulaGen es una aplicación Laravel con una interfaz React servida mediante Inertia. Combina procesamiento de documentos, colas y un proveedor de IA configurable.</p>
-      <h2>Componentes</h2>
-      <table><thead><tr><th>Capa</th><th>Tecnología / función</th></tr></thead><tbody><tr><td>Aplicación</td><td>PHP 8.2+, Laravel 12, Laravel Horizon y Sanctum.</td></tr><tr><td>Interfaz</td><td>Inertia.js, React 18, TypeScript, Vite y Tailwind CSS.</td></tr><tr><td>Datos de producción</td><td>PostgreSQL 17 con pgvector y Redis.</td></tr><tr><td>Desarrollo local</td><td>SQLite como base por defecto; Docker Compose para el stack completo.</td></tr><tr><td>IA</td><td>Gestor de proveedores, embeddings, búsqueda vectorial y recuperación aumentada por generación.</td></tr></tbody></table>
-      <h2>Flujo de material a aula</h2>
-      <ol class="steps"><li class="step"><strong>Carga.</strong> Un docente incorpora archivos o recursos externos en una materia.</li><li class="step"><strong>Procesamiento.</strong> Un job extrae texto, conserva metadatos y divide el material en fragmentos.</li><li class="step"><strong>Indexación.</strong> Cuando el proveedor lo admite, se crean embeddings para recuperar fragmentos relacionados con una consulta.</li><li class="step"><strong>Autoría asistida.</strong> La IA puede generar propuestas de estructura, contenido, actividades y glosario desde las fuentes disponibles.</li><li class="step"><strong>Revisión.</strong> El docente ajusta y aprueba contenido; la publicación controla qué es visible para estudiantes.</li><li class="step"><strong>Consulta.</strong> La búsqueda y el asistente recuperan fragmentos de la materia para devolver resultados contextualizados.</li></ol>
-      <h2>Rutas principales</h2>
-      <table><thead><tr><th>Área</th><th>Propósito</th></tr></thead><tbody><tr><td><code>/dashboard</code> y <code>/courses/{course}</code></td><td>Panel docente y gestión de materias.</td></tr><tr><td><code>/admin</code></td><td>Usuarios, generaciones y configuración global de IA.</td></tr><tr><td><code>/aula/{course}</code></td><td>Aula publicada, módulos, lecciones, actividades, bibliografía, glosario y recursos.</td></tr></tbody></table>
-      <h2>Seguridad de publicación</h2>
-      <p>Las áreas de gestión requieren autenticación, verificación de cuenta y las capacidades correspondientes. La capa pública filtra las lecciones según la publicación y el estado de cada lección. El diseño separa el trabajo en borrador de la experiencia disponible para estudiantes.</p>
-      <h2>Despliegue de documentación</h2>
-      <p>El workflow de GitHub Actions publica el contenido de <code>docs/</code> en GitHub Pages cuando hay cambios en esta carpeta o en el propio workflow. No compila ni ejecuta el backend: el sitio de documentación usa HTML y CSS estáticos.</p>
-    </article>
-  </main>
-  <footer class="page-footer"><div class="footer-inner">AulaGen · <a href="https://github.com/alyohara/aulagen">Repositorio en GitHub</a> · Licencia MIT</div></footer>
-</body>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="AulaGen architecture guide."><title>Architecture | AulaGen</title><link rel="stylesheet" href="assets/wiki.css"><script src="assets/site.js" defer></script></head>
+<body data-page="architecture"></body>
 </html>
