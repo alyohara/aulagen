@@ -11,7 +11,7 @@ export default function Guest({ children }: PropsWithChildren) {
                 <LanguageSwitcher className="absolute right-4 top-4" />
                 <div>
                     <Link href="/">
-                        <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
+                        <ApplicationLogo className="h-20 w-20" />
                     </Link>
                 </div>
 

@@ -25,7 +25,7 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
                                 <Link href="/" className="flex items-center gap-2">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-indigo-600" />
+                                    <ApplicationLogo className="block h-9 w-9" />
                                     <span className="text-sm font-semibold text-slate-700">AulaGen</span>
                                 </Link>
                             </div>

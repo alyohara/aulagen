@@ -1,3 +1,4 @@
+import ApplicationLogo from '@/Components/ApplicationLogo';
 import LanguageSwitcher from '@/Components/LanguageSwitcher';
 import { PageProps } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
@@ -104,7 +105,7 @@ export default function Welcome({ canLogin, canRegister, demo }: PageProps<{ can
             <div className="min-h-screen overflow-hidden bg-slate-950 text-slate-100">
                 <div className="absolute inset-x-0 top-0 -z-0 h-[42rem] bg-[radial-gradient(circle_at_50%_-10%,rgba(37,99,235,0.42),transparent_42rem)]" />
                 <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-                    <div className="flex items-center gap-2.5"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-lg font-bold text-white shadow-lg shadow-blue-950/40">A</span><span className="text-xl font-semibold tracking-tight">AulaGen</span></div>
+                    <div className="flex items-center gap-2.5"><ApplicationLogo className="h-10 w-10 shadow-lg shadow-blue-950/40" /><span className="text-xl font-semibold tracking-tight">AulaGen</span></div>
                     <nav className="flex items-center gap-2">
                         <LanguageSwitcher className="border-slate-700 bg-slate-900/80 text-slate-200 hover:bg-slate-800 hover:text-white" />
                         {canLogin && <Link href={route('login')} className="rounded-md px-3 py-2 text-sm font-medium text-slate-300 transition hover:text-white">{t.signIn}</Link>}
