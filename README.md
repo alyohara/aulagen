@@ -158,9 +158,14 @@ The GitHub Pages site is a static project presentation only. It cannot run the L
 
 ## Documentation
 
-- [Project landing page](https://alyohara.github.io/aulagen/)
-- [Technical installation guide](docs/INSTALL_TECHNICAL.md)
-- [Teacher guide](docs/USAGE_PROFESSOR.md)
+- [Documentation wiki](https://alyohara.github.io/aulagen/)
+- [Quick start and installation](https://alyohara.github.io/aulagen/instalacion.html)
+- [Teacher guide](https://alyohara.github.io/aulagen/docentes.html)
+- [Administration and AI](https://alyohara.github.io/aulagen/administracion.html)
+- [Operations and deployment](https://alyohara.github.io/aulagen/operacion.html)
+- [Architecture](https://alyohara.github.io/aulagen/arquitectura.html)
+
+The Markdown versions remain available in [`docs/`](docs/README.md) for repository readers.
 
 ## License
 

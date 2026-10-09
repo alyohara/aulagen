@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Operación, despliegue y resolución de problemas de AulaGen."><title>Operación | AulaGen Docs</title><link rel="stylesheet" href="assets/wiki.css"></head>
+<body>
+  <header class="site-header"><div class="header-inner"><a class="brand" href="./"><span class="brand-mark">A</span>AulaGen Docs</a><nav class="top-nav" aria-label="Navegación principal"><a href="instalacion.html">Instalación</a><a href="docentes.html">Docentes</a><a href="arquitectura.html">Arquitectura</a><a class="github-link" href="https://github.com/alyohara/aulagen">GitHub</a></nav></div></header>
+  <main class="layout">
+    <aside class="sidebar" aria-label="Secciones de la documentación"><div class="sidebar-group"><p class="sidebar-title">Empezar</p><a href="./">Bienvenida</a><a href="instalacion.html">Instalación</a></div><div class="sidebar-group"><p class="sidebar-title">Uso</p><a href="docentes.html">Guía docente</a><a href="administracion.html">Administración e IA</a></div><div class="sidebar-group"><p class="sidebar-title">Referencia</p><a href="operacion.html" aria-current="page">Operación</a><a href="arquitectura.html">Arquitectura</a></div></aside>
+    <article class="content">
+      <p class="eyebrow">Referencia técnica</p><h1>Operación y despliegue</h1><p class="lead">El procesamiento de materiales y las generaciones pueden ejecutarse en segundo plano. Asegurá colas, almacenamiento y servicios de datos persistentes.</p>
+      <h2>Comandos frecuentes</h2>
+      <pre><code># Estado y logs de los servicios Docker
+docker compose ps
+docker compose logs -f app
+
+# Comandos Laravel dentro del contenedor
+docker compose exec app php artisan migrate --force
+docker compose exec app php artisan tinker
+
+# Detener servicios sin eliminar volúmenes
+docker compose down</code></pre>
+      <h2>Colas y almacenamiento</h2>
+      <p>Docker inicia Horizon en el servicio <code>queue</code>. En un entorno local, ejecutá <code>php artisan horizon</code> o un worker apropiado antes de procesar archivos o solicitar contenido generado.</p>
+      <p>Los archivos cargados usan el sistema de almacenamiento de Laravel. En producción usá un disco persistente, realizá copias de seguridad y ejecutá <code>php artisan storage:link</code> cuando los archivos públicos se sirvan desde el disco local.</p>
+      <h2>Lista de preparación para producción</h2>
+      <ol class="steps"><li class="step">Definí <code>APP_ENV=production</code>, <code>APP_DEBUG=false</code> y un <code>APP_KEY</code> único y seguro.</li><li class="step">Usá credenciales seguras para PostgreSQL, Redis y el proveedor de IA.</li><li class="step">Configurá un <code>APP_URL</code> HTTPS correcto y un proxy o servidor web que termine TLS.</li><li class="step">Persistí y respaldá la base de datos y el almacenamiento de la aplicación.</li><li class="step">Ejecutá Horizon o un worker bajo un supervisor confiable.</li><li class="step">Revisá el tratamiento de datos del proveedor de IA y eliminá las cuentas de demostración.</li></ol>
+      <div class="notice"><strong>GitHub Pages no hospeda AulaGen:</strong> la página de documentación es estática. La aplicación necesita PHP, una base de datos, Redis, workers y almacenamiento persistente.</div>
+      <h2>Diagnóstico</h2>
+      <table><thead><tr><th>Situación</th><th>Qué verificar</th></tr></thead><tbody><tr><td>Un material queda pendiente o falla</td><td>Tipo y tamaño del archivo, worker/Horizon, estado del documento y mensaje de error.</td></tr><tr><td>Falla una generación de IA</td><td>Proveedor seleccionado, prueba de conexión, clave, URL, modelo, límite de tasa y worker.</td></tr><tr><td>El asistente no responde</td><td>Que existan materiales procesados, que el asistente esté habilitado y que haya fragmentos pertinentes.</td></tr><tr><td>El estudiante no ve contenido</td><td>Que la materia esté publicada y que las lecciones correspondientes estén aprobadas o publicadas.</td></tr><tr><td>Docker no conecta a la base</td><td>Esperá el health check de <code>db</code> y revisá <code>docker compose logs db app</code>.</td></tr></tbody></table>
+      <h2>Recuperación local</h2>
+      <pre><code># Limpiar configuración y cachés luego de cambiar .env
+php artisan optimize:clear
+
+# Reiniciar datos de desarrollo
+php artisan migrate:fresh --seed
+
+# Validar frontend y pruebas de aplicación
+npm run build
+vendor\bin\phpunit</code></pre>
+    </article>
+  </main>
+  <footer class="page-footer"><div class="footer-inner">AulaGen · <a href="https://github.com/alyohara/aulagen">Repositorio en GitHub</a> · Licencia MIT</div></footer>
+</body>
+</html>
